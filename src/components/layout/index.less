@@ -1,0 +1,21 @@
+@import "~antd/lib/style/themes/default.less";
+@import "~common/less/base.less";
+
+.layout {
+  min-height: 100vh;
+
+  .side {
+    background: @success-color;
+  }
+
+  .container {
+    .header {
+      padding: 0 @spacer;
+      background: white;
+      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+    }
+    .content {
+      padding: @spacer;
+    }
+  }
+}
