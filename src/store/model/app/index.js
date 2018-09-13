@@ -3,5 +3,5 @@ import Base from '../base';
 
 export default class App extends Base {
   @observable sideCollapsed = false;
-  @observable sideTheme = 'light'; // 'dark' : 'light'
+  @observable sideTheme = 'dark'; // 'dark' : 'light'
 }

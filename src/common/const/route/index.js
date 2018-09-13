@@ -27,9 +27,11 @@ const routeData = [
     label: '首页',
     // noSideShow: true,
     path: '/',
+    icon: 'desktop',
     desc: '首页',
     component: lazyComponent('home'),
     isAuth: true,
+    children: [],
   },
 ];
 

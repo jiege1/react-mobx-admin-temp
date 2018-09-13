@@ -1,11 +1,14 @@
 import React from 'react';
 import css from './index.less';
 import { Layout as AntLayout } from 'antd';
+import {observer, inject} from 'mobx-react';
 import Header from './components/header';
 import Footer from './components/footer';
-import Menu from './components/menu';
-const { Content, Footer: AntFooter, Sider, Header: AntHeader } = AntLayout;
+import Side from './components/side';
+const { Content, Footer: AntFooter, Header: AntHeader } = AntLayout;
 
+@inject('store')
+@observer
 export default class Layout extends React.Component {
 
   static propTypes = {};
@@ -20,11 +23,10 @@ export default class Layout extends React.Component {
   componentDidMount() {}
 
   render() {
+    const {sideCollapsed, sideTheme} = this.props.store.app;
     return (
       <AntLayout className={css.layout}>
-        <Sider className={css.side}>
-          <Menu />
-        </Sider>
+        <Side />
         <AntLayout className={css.container}>
           <AntHeader className={css.header}>
             <Header />
