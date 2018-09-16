@@ -1,6 +1,7 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 import {Spin} from 'antd';
+import store from 'store';
 
 const loading = (err) => {
 
@@ -13,10 +14,31 @@ const loading = (err) => {
   );
 };
 
-const lazyComponent = (path) => {
-  return Loadable({
-    loader: () => import(`pages/${path}`),
+const lazyComponent = (path, model) => {
+  let loader = {
+    component: () => import(`pages/${path}`)
+  };
+
+  // 动态加载model
+  if (model) {
+    if (typeof model !== 'string') model = path;
+    loader[model] = () => import(`pages/${path}/model`);
+  }
+
+  return Loadable.Map({
+    loader,
     loading,
+    render(loaded, props) {
+      // 将model动态挂载到 store 上
+      if (loaded[model]) {
+        const Model = loaded[model].default;
+        if (!store[model]) {
+          store[model] = new Model();
+        }
+      }
+      let C = loaded.component.default;
+      return <C {...props}/>;
+    }
   });
 };
 
@@ -29,7 +51,18 @@ const routeData = [
     path: '/',
     icon: 'desktop',
     desc: '首页',
-    component: lazyComponent('home'),
+    component: lazyComponent('home', true),
+    isAuth: true,
+    children: [],
+  },
+  {
+    key: 'page1',
+    label: '页面1',
+    // noSideShow: true,
+    path: '/page1',
+    icon: 'desktop',
+    desc: '页面1',
+    component: lazyComponent('page1', true),
     isAuth: true,
     children: [],
   },

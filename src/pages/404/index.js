@@ -1,9 +1,6 @@
 import React from 'react';
-import {observer, inject} from 'mobx-react';
 
-@inject('store')
-@observer
-export default class Home extends React.Component {
+export default class Page1 extends React.Component {
 
   static propTypes = {};
 
@@ -15,13 +12,12 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.store);
   }
 
   render() {
     return (
       <div>
-        Home
+        404 not found!
       </div>
     );
   }

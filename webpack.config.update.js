@@ -3,8 +3,6 @@ const rootSrc = __dirname + '/src';
 
 module.exports = (config) => {
 
-  console.log(config.module.rules[2]);
-
   config = {
     ...config,
     resolve: {

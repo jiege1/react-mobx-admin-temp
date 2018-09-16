@@ -21,30 +21,16 @@ export default class Side extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      selected: '',
-    };
+    this.state = {};
   }
 
-  componentDidMount() {
-    this.setSelectedKeys();
-  }
-
-  componentDidUpdate() {
-    this.setSelectedKeys();
-  }
-
-  setSelectedKeys() {
+  get selectedKey() {
     let nextSelect = 'home';
     const pathArr = this.props.location.pathname.split('/');
     if (pathArr[pathArr.length - 1] && pathArr[pathArr.length - 1].length) {
       nextSelect = pathArr[pathArr.length - 1];
     }
-    if (this.state.selected !== nextSelect) {
-      this.setState({
-        selected: nextSelect,
-      });
-    }
+    return [nextSelect];
   }
 
   renderNavItems() {
@@ -94,7 +80,7 @@ export default class Side extends React.Component {
   renderMenu() {
     const {sideTheme} = this.props.store.app;
     const props = {
-      selectedKeys: [this.state.selected],
+      selectedKeys: this.selectedKey,
       mode: 'inline',
       theme: sideTheme,
     };
