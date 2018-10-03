@@ -7,19 +7,19 @@ import {inject} from 'mobx-react';
  * 推荐使用该方法，不建议 inject('store')
  *
  * @param modelName  store里面的字段
- * @param entryName  输出字段
+ * @param outputName  输出字段
  * @returns {function(*): ((function(*): *) & IWrappedComponent<function(*): *>)}
  */
-export default function injectModel(modelName, entryName) {
-  if (!entryName) {
-    entryName = modelName;
+export default function injectModel(modelName, outputName) {
+  if (!outputName) {
+    outputName = modelName;
   }
   return function(Com) {
 
     return inject('store')((props) => {
       let { store, ...comProps } = props;
       if (store[modelName]) {
-        comProps[entryName] = store[modelName];
+        comProps[outputName] = store[modelName];
       } else {
         comProps.store = store;
       }
