@@ -1,7 +1,8 @@
 import React from 'react';
-import {observer, inject} from 'mobx-react';
+import injectModel from 'common/utils/injectModel';
+import {observer} from 'mobx-react';
 
-@inject('store')
+@injectModel('home', 'model')
 @observer
 export default class Home extends React.Component {
 
@@ -15,13 +16,21 @@ export default class Home extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.store);
+    const {model} = this.props;
+    console.log('this.props===', this.props);
+    setTimeout(() => {
+      model.update({
+        test: 1,
+      });
+    }, 1000);
   }
 
   render() {
+    const {model} = this.props;
     return (
       <div>
-        Home
+        Home <br/>
+        test: {model.test}
       </div>
     );
   }

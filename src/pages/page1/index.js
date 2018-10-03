@@ -1,7 +1,8 @@
 import React from 'react';
-import {observer, inject} from 'mobx-react';
+import {observer} from 'mobx-react';
+import injectModel from 'common/utils/injectModel';
 
-@inject('store')
+@injectModel('page1', 'model')
 @observer
 export default class Page1 extends React.Component {
 
@@ -15,7 +16,7 @@ export default class Page1 extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.store);
+    console.log(this.props);
   }
 
   render() {

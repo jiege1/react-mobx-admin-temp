@@ -10,6 +10,7 @@ import store from 'store';
 import 'moment/locale/zh-cn';
 import './index.less';
 
+
 ReactDom.render(
   <LocaleProvider locale={zhCN}>
     <Provider store={store}>
